@@ -74,8 +74,8 @@ class PermissionTableSeeder extends Seeder
         self::updateOrCreate([
             "name" => "Xem danh sách quyền hạn của vai trò",
             "description" => "",
-            "code" => "PERMISSION-DETAIL",
-            "permission_type_code" => "DETAIL",
+            "code" => "PERMISSION-L",
+            "permission_type_code" => "LIST",
             "permission_group_code" => "PERMISSION",
             "role_ids" => []
         ]);

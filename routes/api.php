@@ -48,7 +48,8 @@ Route::group(["middleware" => "api"], function () {
 			    Route::get("/", [Admins\RoleController::class, "index"]);
 			    Route::get("/{id}/employees", [Admins\RoleController::class, "getAdminsRole"]);
 			    Route::get("/permission-types", [Admins\RoleController::class, "getPermissionTypes"]);
-			    Route::post("/add-role-for-admins/{id}", [Admins\RoleController::class, "updateRoleForEmployees"]);
+                Route::post("/action", [Admins\RoleController::class, "rolesAction"]);
+			    Route::post("/update-role-for-employees/{id}", [Admins\RoleController::class, "updateRoleForEmployees"]);
 			    Route::post("/", [Admins\RoleController::class, "store"]);
 			    Route::patch("/sync-permissions/{id}", [Admins\RoleController::class, "syncPermissions"]);
 			    Route::patch("/{id}", [Admins\RoleController::class, "update"]);
@@ -58,7 +59,7 @@ Route::group(["middleware" => "api"], function () {
 
             /* Permission::start */
             Route::group(["prefix" => "permissions"], function () {
-                Route::get("/{id}", [Admins\PermissionController::class, "index"]);
+                Route::get("/", [Admins\PermissionController::class, "index"]);
                 Route::get("/{id}/employees", [Admins\RoleController::class, "getAdminsRole"]);
             });
             /* Permission::end */

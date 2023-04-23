@@ -19,8 +19,7 @@ class PermissionService
             Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách quyền hạn của vai trò", [
                 "method" => __METHOD__,
                 "line" => __LINE__,
-                "message" => $e->getMessage(),
-                "id" => $id
+                "message" => $e->getMessage()
             ]);
 
             return false;
