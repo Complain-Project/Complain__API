@@ -32,8 +32,8 @@ class Employee extends Authenticatable implements JWTSubject
 	];
 
 	const ACTIVE_STATUS = [
-		"ACTIVATED" => 0,
-		"DEACTIVATE" => 1,
+		"ACTIVATED" => 1,
+		"DEACTIVATE" => 0,
 	];
 
 	/**
