@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Admins\DistrictTableSeeder;
 use Database\Seeders\Admins\EmployeeTableSeeder;
 use Database\Seeders\Admins\FakeSongsSeeder;
 use Database\Seeders\Admins\PermissionGroupTableSeeder;
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             EmployeeTableSeeder::class,
             PermissionTypesTableSeeder::class,
-//            FakeSongsSeeder::class
+            DistrictTableSeeder::class
             /* Admin::end */
         ]);
     }

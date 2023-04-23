@@ -78,6 +78,13 @@ Route::group(["middleware" => "api"], function () {
 			    Route::delete("/{id}", [Admins\EmployeeController::class, "destroy"]);
 		    });
 		    /* Employee::end */
+
+		    /* User::start */
+		    Route::group(["prefix" => "users"], function () {
+			    Route::get("/", [Admins\UserController::class, "index"]);
+			    Route::patch("/{id}/status", [Admins\UserController::class, "updateStatus"]);
+		    });
+		    /* User::end */
 	    });
     });
     /* Admin::end */
