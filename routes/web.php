@@ -38,7 +38,6 @@ Route::group(['middleware' => 'user.auth'], function () {
 
     /* Complain::start*/
     Route::group(['prefix' => '/complain'], function () {
-        Route::get('/{id}', [ComplainController::class, 'show'])->name('complain.detail');
         Route::post('/', [ComplainController::class, 'store'])->name('complain.store');
     });
 
@@ -46,6 +45,8 @@ Route::group(['middleware' => 'user.auth'], function () {
 });
 
 Route::get('/complain', [ComplainController::class, 'submitComplainForm'])->name('complain.form');
+Route::get('/complain/{id}', [ComplainController::class, 'show'])->name('complain.detail');
+
 Route::get('/', [ComplainController::class, 'index'])->name('home');
 Route::get('/history', [ComplainController::class, 'history'])->name('history');
 Route::get('/all-district', [ComplainController::class, 'getAllDistrict']);
