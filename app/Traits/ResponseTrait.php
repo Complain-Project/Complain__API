@@ -8,9 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 trait ResponseTrait
 {
 	/**
-	 * @param array $data
+	 * @param mixed $data
 	 * @param string $message
 	 * @param int $code
+	 * @param int $httpStatusCode
 	 *
 	 * @return JsonResponse
 	 */

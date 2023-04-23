@@ -74,8 +74,8 @@ class PermissionTableSeeder extends Seeder
         self::updateOrCreate([
             "name" => "Xem danh sách quyền hạn của vai trò",
             "description" => "",
-            "code" => "PERMISSION-L",
-            "permission_type_code" => "LIST",
+	        "code" => "PERMISSION-L",
+	        "permission_type_code" => "LIST",
             "permission_group_code" => "PERMISSION",
             "role_ids" => []
         ]);
@@ -89,7 +89,7 @@ class PermissionTableSeeder extends Seeder
         ]);
         /* Quyền hạn::end */
 
-        /* Nhân viên::start */
+        /* cán bộ::start */
         self::updateOrCreate([
             "name" => "Xem danh sách nhân viên",
             "description" => "",

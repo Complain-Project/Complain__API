@@ -2,7 +2,9 @@
 
 namespace App\Services\Admins;
 
+use App\Models\Admins\District;
 use App\Models\Admins\Employee;
+use App\Models\Admins\Role;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
@@ -19,32 +21,54 @@ class EmployeeService
 	public function index($request): LengthAwarePaginator|bool
 	{
 		try {
-			$keyword = $request->keyword;
 			$perPage = $request->per_page ?: config('constants.per_page');
-			$employee = Employee::query()->with(["roles"]);
+			$employee = Employee::query()->with(["roles", "district"]);
 
-			if ($request->filled("keyword")) {
-				$employee->whereRaw(['$text' => ['$search' => $keyword]]);
+			if ($request->filled("q")) {
+				$keyword = $request->q;
+				$employee->where("name", "LIKE", "%" . $keyword . "%")
+					->orWhere("email", "LIKE", "%" . $keyword . "%")
+					->orWhere("phone", "LIKE", "%" . $keyword . "%");
 			}
 
-			if ($request->filled("column") && $request->filled("direction")) {
-				$employee->orderBy(
-					$request->column,
-					$request->direction
-				);
-			} else if ($request->filled("keyword")) {
-				$employee->orderBy('score', ['$meta' => 'textScore']);
-			} else {
-				$employee->latest();
-			}
-
-			return $employee->paginate($perPage);
+			return $employee->latest()->paginate($perPage);
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
 				"data" => $request->all()
+			]);
+
+			return false;
+		}
+	}
+
+	public function getAllRole()
+	{
+		try {
+			$query = Role::query()->where("is_protected", false);
+			return $query->get(["name"]);
+		} catch (Exception $e) {
+			Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách vai trò", [
+				"method" => __METHOD__,
+				"line" => __LINE__,
+				"message" => $e->getMessage()
+			]);
+
+			return false;
+		}
+	}
+
+	public function getAllDistrict()
+	{
+		try {
+			return District::all();
+		} catch (Exception $e) {
+			Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách huyện", [
+				"method" => __METHOD__,
+				"line" => __LINE__,
+				"message" => $e->getMessage()
 			]);
 
 			return false;
@@ -59,27 +83,20 @@ class EmployeeService
 	public function store($request): bool
 	{
 		try {
-			$avatarPath = "";
-			$keyword = [$request->name, $request->email, $request->phone];
-
-			if ($request->hasFile("avatar_path")) {
-				$avatarPath = Storage::disk("public")->put("admins/avatars", $request->file('avatar_path'));
-			}
-
 			Employee::query()->create([
 				"name" => $request->name,
 				"email" => $request->email,
 				"phone" => $request->phone,
 				"password" => Hash::make($request->password),
-				"avatar_path" => $avatarPath,
 				"status" => (int)$request->status,
-				"keyword" => collect($keyword)->implode(" "),
+				"is_admin" => false,
+				"district_id" => $request->district_id,
 				"role_ids" => []
-			]);
+			])->roles()->sync($request->role_ids);
 
 			return true;
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi tạo mới nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi tạo mới cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
@@ -100,24 +117,19 @@ class EmployeeService
 	{
 		try {
 			$employee = Employee::query()->find($id);
-			$keyword = [$request->name, $request->email, $request->phone];
-
-			$avatarPath = $request->hasFile("avatar_path") ?
-				Storage::disk("public")->put("admins/avatars", $request->file('avatar_path')) :
-				$employee->avatar_path;
-
 			$employee->update([
 				"name" => $request->name,
 				"email" => $request->email,
 				"phone" => $request->phone,
-				"avatar_path" => $avatarPath,
 				"status" => (int)$request->status,
-				"keyword" => collect($keyword)->implode(" ")
+				"district_id" => $request->district_id,
+				"role_ids" => []
 			]);
+			$employee->roles()->sync($request->role_ids);
 
 			return true;
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật thông tin nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật thông tin cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
@@ -144,7 +156,7 @@ class EmployeeService
 
 			return true;
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật trạng thái nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật trạng thái cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
@@ -171,7 +183,7 @@ class EmployeeService
 
 			return true;
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật mật khẩu nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật mật khẩu cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
@@ -195,7 +207,7 @@ class EmployeeService
 
 			return true;
 		} catch (Exception $e) {
-			Log::error("ERROR - Đã có lỗi xảy ra khi xóa nhân viên", [
+			Log::error("ERROR - Đã có lỗi xảy ra khi xóa cán bộ", [
 				"method" => __METHOD__,
 				"line" => __LINE__,
 				"message" => $e->getMessage(),
