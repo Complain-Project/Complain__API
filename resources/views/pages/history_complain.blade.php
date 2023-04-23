@@ -49,7 +49,12 @@
 
                     <div class="form-group">
                         <form action="{{route('history')}}" method="GET">
-                            <div class="input-form">
+                            <div class="input-form d-flex">
+                                <select name="district" id="district_id"
+                                        data-code="{{$district}}"
+                                        class="form-control me-2 w-50">
+                                    <option selected>Chọn cơ quan tiếp nhận</option>
+                                </select>
                                 <input type="text" id="search" name="q" value="{{ $q }}" class="form-control"
                                        placeholder="Nhập mã số / Tiêu đề khiếu nại để tìm kiếm">
                                 <button type="submit" class="btn btn-search btn-main">Tìm kiếm</button>
@@ -60,6 +65,12 @@
                     @if($q)
                         <div class="main-title result">
                             Có {{count($complains)}} kết quả cho từ khóa "<b>{{$q}}</b>"
+                        </div>
+                    @endif
+
+                    @if(count($complains) == 0)
+                        <div class="main-title result text-center mt-5">
+                            Không có kết quả nào phù hợp.
                         </div>
                     @endif
 

@@ -50,7 +50,7 @@
                 position: relative;
                 margin-bottom: 20px;
 
-                input {
+                input, select {
                     &:focus {
                         box-shadow: unset;
                         outline: none;
