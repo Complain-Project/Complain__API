@@ -6,6 +6,7 @@ use App\Models\Admins\District;
 use App\Models\Admins\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Jenssegers\Mongodb\Eloquent\Model;
 use MongoDB\Operation\FindOneAndUpdate;
@@ -46,6 +47,10 @@ class Complain extends Model
     public function respondent()
     {
         return $this->belongsTo(Employee::class, "respondent_id", "_id");
+    }
+
+    public function getAttachmentAttribute($value) {
+        return url(Storage::url($value));
     }
 
     /**

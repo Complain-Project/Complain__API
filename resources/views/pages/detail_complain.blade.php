@@ -11,7 +11,7 @@
 @endsection
 
 @section('script')
-
+    <script src="{{ mix('/js/complain/_detail.js') }}"></script>
 @endsection
 
 @section('content')
@@ -51,6 +51,15 @@
                             <p style="text-align: justify;" class="post-shortdesc">
                                 {{$complain->content}}
                             </p>
+                            @if($complain->attachment && Auth::guard('clients')->id() === $complain->user_id)
+                                <a href="{{$complain->attachment}}" id="attachment">
+                                    <p>
+                                        <i class="fa-solid fa-paperclip"></i>
+                                        Tài liệu đính kèm
+                                    </p>
+                                </a>
+
+                            @endif
                         </div>
                     </div>
                     <div class="divider-gray"></div>
@@ -74,7 +83,7 @@
                             @endif
                         </div>
 
-                        @if($complain->appointment_time)
+                        @if($complain->appointment_time && Auth::guard('clients')->id() === $complain->user_id)
                             <i class="font-bold">Giấy hẹn:</i>
 
                             <div class="complain-reply">

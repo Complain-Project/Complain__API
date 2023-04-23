@@ -8,6 +8,7 @@ use App\Models\Clients\Complain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ComplainController extends Controller
 {
@@ -79,6 +80,12 @@ class ComplainController extends Controller
             $complain->respondent_id = null;
             $complain->reply = null;
             $complain->appointment_time = null;
+
+            if($request->hasFile('attachment')) {
+                $path = Storage::disk('public')->put('upload/attachments', $request->file('attachment'));
+                $complain->attachment = $path;
+            }
+
             $complain->save();
 
             return redirect()->route('home')->with('success', 'Gửi khiếu nại thành công.');
