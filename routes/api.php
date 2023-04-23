@@ -79,6 +79,15 @@ Route::group(["middleware" => "api"], function () {
 		    });
 		    /* Employee::end */
 
+            /* Complain::start */
+            Route::group(["prefix" => "complains"], function () {
+                Route::get("/", [Admins\ComplainController::class, "index"]);
+                Route::get("/districts", [Admins\ComplainController::class, "getAllDistrict"]);
+                Route::get("/{id}", [Admins\ComplainController::class, "show"]);
+                Route::post("/reply/{id}", [Admins\ComplainController::class, "reply"]);
+            });
+            /* Complain::end */
+
 		    /* User::start */
 		    Route::group(["prefix" => "users"], function () {
 			    Route::get("/", [Admins\UserController::class, "index"]);
