@@ -6,6 +6,26 @@
     .content {
         width: 100%;
 
+        .no-auth {
+
+            .alert-show {
+                background-color: #CE7A58;
+                white-space: normal;
+            }
+
+            .alert-show .mess {
+                color: #ffffff;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .alert-show .mess a:hover {
+                color: #3b3bff
+            }
+        }
+
         .main-title {
             margin: 0px;
             font-size: 28px;
