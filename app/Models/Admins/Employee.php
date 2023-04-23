@@ -10,11 +10,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Employee extends Authenticatable implements JWTSubject
 {
-	use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-	protected $guard = "admins";
+    protected $guard = "admins";
 
-	protected $table = "employees";
+    protected $table = "employees";
 
 	protected $fillable = [
 		"name",
@@ -27,42 +27,42 @@ class Employee extends Authenticatable implements JWTSubject
 		"role_ids"
 	];
 
-	protected $hidden = [
-		"password",
-	];
+    protected $hidden = [
+        "password",
+    ];
 
 	const ACTIVE_STATUS = [
 		"DEACTIVATE" => 0,
 		"ACTIVATED" => 1,
 	];
 
-	/**
-	 * @return void
-	 */
-	protected static function boot(): void
-	{
-		parent::boot();
+    /**
+     * @return void
+     */
+    protected static function boot(): void
+    {
+        parent::boot();
 
-		static::deleting(function (Employee $employee) {
-			$employee->roles()->detach();
-		});
-	}
+        static::deleting(function (Employee $employee) {
+            $employee->roles()->detach();
+        });
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getJWTIdentifier(): mixed
-	{
-		return $this->getKey();
-	}
+    /**
+     * @return mixed
+     */
+    public function getJWTIdentifier(): mixed
+    {
+        return $this->getKey();
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getJWTCustomClaims(): array
-	{
-		return [];
-	}
+    /**
+     * @return array
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
 
 	/**
 	 * @return \Jenssegers\Mongodb\Relations\BelongsToMany|BelongsToMany

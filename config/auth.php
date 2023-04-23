@@ -45,7 +45,7 @@ return [
         ],
 
 	    "clients" => [
-		    "driver" => "jwt",
+		    "driver" => "session",
 		    "provider" => "clients",
 	    ],
     ],

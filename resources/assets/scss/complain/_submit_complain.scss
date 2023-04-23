@@ -1,0 +1,96 @@
+.complain {
+    min-height: calc(100vh - 400px);
+    padding: 30px 0;
+    background-color: #fff;
+
+    .content {
+        width: 100%;
+
+        .no-auth {
+
+            .alert-show {
+                background-color: #CE7A58;
+                white-space: normal;
+            }
+
+            .alert-show .mess {
+                color: #ffffff;
+
+                a {
+                    color: #fff;
+                }
+            }
+
+            .alert-show .mess a:hover {
+                color: #3b3bff
+            }
+        }
+
+        .box-form-wrapper {
+            background: rgba(234, 160, 49, 0.1);
+            border: none;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+
+            .main-title {
+                margin: 0px;
+                font-size: 28px;
+                display: block;
+                margin-bottom: 20px;
+                color: #333333;
+                font-weight: 500;
+                line-height: 36px;
+                position: relative;
+                text-align: justify;
+            }
+
+            .box-form {
+                .label-text {
+                    padding-top: 7px;
+                    margin-bottom: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                input, select, textarea {
+                    &:focus {
+                        box-shadow: unset;
+                        outline: none;
+                    }
+                }
+                .btn {
+                    border-radius: 4px;
+                    min-width: 160px;
+                    font-size: 18px;
+                    height: 40px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .btn-submit {
+                    background: #CE7A58;
+                    color: #fff;
+                }
+                .btn-reset {
+                    color: #333;
+                    background-color: #fff;
+                    border-color: #ccc;
+                }
+            }
+        }
+    }
+
+    label.error {
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .required {
+        color: red;
+    }
+}
