@@ -44,7 +44,7 @@
                         Tiếp nhận khiếu nại
                     </div>
                     <div class="box-form">
-                        <form id="submit_complain" action="{{route('complain.store')}}" method="post">
+                        <form id="submit_complain" action="{{route('complain.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">
                                 <div class="col-sm-3 col-xs-12 label-text control-label">
@@ -80,6 +80,15 @@
                                         <option selected>Chọn cơ quan tiếp nhận</option>
 
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-3 col-xs-12 label-text control-label">
+                                    Tài liệu đính kèm
+                                </div>
+                                <div class="input col-sm-9 col-xs-12">
+                                    <input type="file" id="attachment" accept=".doc,.docx,.xlsx,.pdf" name="attachment">
+                                    <ul id="fileList"></ul>
                                 </div>
                             </div>
                             <div class="form-group row mb-3">

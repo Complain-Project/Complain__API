@@ -39,5 +39,5 @@ mix.js('resources/assets/js/profile/_profile.js', 'public/js/profile/');
 
 /* Detail complain::start */
 mix.sass('resources/assets/scss/complain/_detail.scss', 'public/css/complain/');
-
+mix.js('resources/assets/js/complain/_detail.js', 'public/js/complain/');
 /* Detail complain::end */
