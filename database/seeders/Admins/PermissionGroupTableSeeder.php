@@ -34,11 +34,18 @@ class PermissionGroupTableSeeder extends Seeder
         ]);
 
         self::updateOrCreate([
-            "name" => "Quản lý nhân viên",
+            "name" => "Quản lý cán bộ",
             "code" => "ADM",
             "parent_code" => null,
             "description" => null
         ]);
+
+	    self::updateOrCreate([
+		    "name" => "Quản lý người khiếu nại",
+		    "code" => "COMPLAINANT",
+		    "parent_code" => null,
+		    "description" => null
+	    ]);
     }
 
     /**
