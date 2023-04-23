@@ -26,7 +26,7 @@
                     $date = Carbon::parse($complain['created_at'])
                 @endphp
                 <div class="post-info">
-                    {{$complain->user->aliases}}
+                    {{Auth::guard('clients')->id() === $complain->user_id ? $complain->user->name : $complain->user->aliases}}
                     - {{$date->format('m:h') . ' ngày ' . $date->format(' d/m/Y')}}
 
                     @if($complain->status === Complain::STATUS['PROCESSED'])
