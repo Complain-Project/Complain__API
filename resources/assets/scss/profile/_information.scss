@@ -1,0 +1,105 @@
+.information-wrap {
+    background: #ffff;
+    padding: 20px 30px;
+    min-height: 575px;
+
+    .header-wrap {
+        margin-bottom: 15px;
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .form-wrap {
+        width: 100%;
+
+        .input-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+
+            .error--message {
+                position: absolute;
+                bottom: -20px;
+            }
+
+            .title {
+                margin-bottom: 6px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            input {
+                width: 100%;
+                border: 1px solid #F0F0F0;
+                height: 40px;
+                border-radius: 4px;
+                outline: none;
+                padding: 10px 14px;
+                font-size: 16px;
+                font-weight: 500;
+
+                &:focus {
+                    border: 1px solid #F0F0F0;
+                }
+            }
+
+            textarea {
+                width: 100%;
+                border: 1px solid #F0F0F0;
+                border-radius: 4px;
+                outline: none;
+                padding: 10px 14px;
+                font-size: 16px;
+                font-weight: 500;
+
+                &:focus {
+                    border: 1px solid #F0F0F0;
+                }
+            }
+        }
+    }
+
+    .btn-wrap {
+
+        button {
+            border-radius: 4px;
+            min-width: 160px;
+            font-size: 18px;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: none;
+            background: $originColor;
+            padding: 7px 24px;
+            font-weight: 700;
+            line-height: 22px;
+
+            &:focus {
+                background: $originColor;
+            }
+        }
+    }
+    label.error {
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .required {
+        color: red;
+    }
+}
+
+input:disabled, textarea:disabled {
+    background: #F7F7F7;
+}
+

@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Illuminate\Support\Facades\Route;
 
 if (!function_exists("service_path")) {
 	function service_path(): string
@@ -33,4 +34,14 @@ if (!function_exists("console_output")) {
 		}
 
 	}
+}
+
+if (!function_exists('getActiveMenuClass')) {
+    function getActiveMenuClass($routeName): string
+    {
+        if (is_array($routeName)) {
+            return in_array(Route::currentRouteName(), $routeName) ? 'active' : '';
+        }
+        return (Route::currentRouteName() === $routeName )? 'active' : '';
+    }
 }

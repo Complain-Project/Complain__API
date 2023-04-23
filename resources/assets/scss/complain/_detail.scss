@@ -1,0 +1,133 @@
+.detail {
+    min-height: calc(100vh - 400px);
+    padding: 30px 0;
+    background-color: #fff;
+
+    .content {
+        width: 100%;
+
+        .main-title {
+            margin: 0px;
+            font-size: 28px;
+            display: block;
+            margin-bottom: 20px;
+            color: #333333;
+            font-weight: 500;
+            line-height: 36px;
+            position: relative;
+            text-align: justify;
+        }
+
+        .post-info {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 7px;
+        }
+
+        .status {
+            margin-left: 15px;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .noanswer {
+            color: #FFAB00;
+        }
+        .replied {
+            color: #36B37E;
+        }
+
+        .item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            position: relative;
+            padding-left: 140px;
+            min-height: 100px;
+
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .icon {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                background: rgba(234, 160, 49, 0.1);
+                border-radius: 50%;
+                padding: 20px 15px;
+                text-align: center;
+                display: block;
+
+                img {
+                    height: 60px;
+                    width: 60px;
+                }
+            }
+
+            .content {
+                .title {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+                .post-shortdesc {
+                    text-align: justify;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .complain-reply {
+                max-width: 1200px;
+                border: 1px solid #000;
+            }
+        }
+
+        .divider-gray {
+            margin: 20px 0px;
+            height: 1px;
+            background: #E9F0F8;
+        }
+
+        .main-title-sub {
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 30px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .list-document {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-bottom: 7px;
+            }
+
+            a {
+                display: block;
+                padding: 7px 0;
+                padding-left: 40px;
+                position: relative;
+                text-align: justify;
+
+                .icon {
+                    position: absolute;
+                    left: 0;
+
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+}

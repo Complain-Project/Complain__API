@@ -1,0 +1,53 @@
+@import "variables";
+
+body {
+    background-color: #FBFBFB;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+    }
+
+    .main-container {
+        background-color: #FFFFFF;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #C9CDCF;
+        padding: 20px;
+    }
+
+    .btn-submit {
+        background: #CE7A58;
+        border: 1px solid #CE7A58;
+        color: #fff;
+
+        &:hover {
+            background: #CE7A58;
+            color: #fff;
+        }
+    }
+
+    input {
+        &:focus {
+            box-shadow: unset !important;
+            outline: none !important;
+        }
+    }
+
+    label.error {
+        color: red;
+        margin-bottom: 10px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .text-cam {
+        color: #CE7A58;
+    }
+
+    .required {
+        color: red;
+    }
+}

@@ -2,17 +2,12 @@
 
 namespace App\Services\Admins;
 
-use App\Models\Admins\PermissionType;
-use Illuminate\Http\Request;
 use App\Models\Admins\Employee;
+use App\Models\Admins\PermissionType;
 use App\Models\Admins\Role;
-use App\Models\Clients\User;
 use Exception;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class RoleService

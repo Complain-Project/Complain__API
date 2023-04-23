@@ -11,7 +11,33 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+/* Layout::start */
+mix.sass('resources/assets/scss/app.scss', 'public/css');
+mix.js('resources/assets/js/app.js', 'public/js');
+
+mix.sass('resources/assets/scss/includes/_header.scss', 'public/css/includes/');
+mix.js('resources/assets/js/includes/_header.js', 'public/js/includes/');
+
+mix.sass('resources/assets/scss/_auth.scss', 'public/css');
+mix.js('resources/assets/js/_auth.js', 'public/js');
+/* Layout::end */
+
+/* Home::start */
+mix.sass('resources/assets/scss/home/_home.scss', 'public/css/home/');
+mix.js('resources/assets/js/home/_home.js', 'public/js/home/');
+/* Home::end */
+
+/* Submit complain::start */
+mix.sass('resources/assets/scss/complain/_submit_complain.scss', 'public/css/complain/');
+mix.js('resources/assets/js/complain/_submit_complain.js', 'public/js/complain/');
+/* Submit complain::end */
+
+/* Profile::start */
+mix.sass('resources/assets/scss/profile/_profile.scss', 'public/css/profile/');
+mix.js('resources/assets/js/profile/_profile.js', 'public/js/profile/');
+/* Profile::end */
+
+/* Detail complain::start */
+mix.sass('resources/assets/scss/complain/_detail.scss', 'public/css/complain/');
+
+/* Detail complain::end */
