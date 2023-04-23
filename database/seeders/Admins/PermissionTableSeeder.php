@@ -79,6 +79,7 @@ class PermissionTableSeeder extends Seeder
             "permission_group_code" => "PERMISSION",
             "role_ids" => []
         ]);
+
         self::updateOrCreate([
             "name" => "Chỉnh sửa quyền hạn của vai trò",
             "description" => "",
@@ -89,9 +90,9 @@ class PermissionTableSeeder extends Seeder
         ]);
         /* Quyền hạn::end */
 
-        /* cán bộ::start */
+        /* Cán bộ::start */
         self::updateOrCreate([
-            "name" => "Xem danh sách nhân viên",
+            "name" => "Xem danh sách cán bộ",
             "description" => "",
             "code" => "ADM-L",
             "permission_type_code" => "LIST",
@@ -100,16 +101,7 @@ class PermissionTableSeeder extends Seeder
         ]);
 
         self::updateOrCreate([
-            "name" => "Xem chi tiết nhân viên",
-            "description" => "",
-            "code" => "ADM-D",
-            "permission_type_code" => "DETAIL",
-            "permission_group_code" => "ADM",
-            "role_ids" => []
-        ]);
-
-        self::updateOrCreate([
-            "name" => "Thêm mới nhân viên",
+            "name" => "Thêm mới cán bộ",
             "description" => "",
             "code" => "ADM-C",
             "permission_type_code" => "CREATE",
@@ -118,7 +110,7 @@ class PermissionTableSeeder extends Seeder
         ]);
 
         self::updateOrCreate([
-            "name" => "Cập nhật nhân viên",
+            "name" => "Cập nhật cán bộ",
             "description" => "",
             "code" => "ADM-U",
             "permission_type_code" => "UPDATE",
@@ -127,14 +119,33 @@ class PermissionTableSeeder extends Seeder
         ]);
 
         self::updateOrCreate([
-            "name" => "Xóa nhân viên",
+            "name" => "Xóa cán bộ",
             "description" => "",
             "code" => "ADM-DEL",
             "permission_type_code" => "DELETE",
             "permission_group_code" => "ADM",
             "role_ids" => []
         ]);
-        /* Nhân viên::end */
+        /* Cán bộ::end */
+
+	    /* Người khiếu nại::start */
+	    self::updateOrCreate([
+		    "name" => "Xem danh sách người khiếu nại",
+		    "description" => "",
+		    "code" => "COMPLAINANT-L",
+		    "permission_type_code" => "LIST",
+		    "permission_group_code" => "COMPLAINANT",
+		    "role_ids" => []
+	    ]);
+	    self::updateOrCreate([
+		    "name" => "Chỉnh sửa người khiếu nại",
+		    "description" => "",
+		    "code" => "COMPLAINANT-U",
+		    "permission_type_code" => "UPDATE",
+		    "permission_group_code" => "COMPLAINANT",
+		    "role_ids" => []
+	    ]);
+	    /* Người khiếu nại::end */
     }
 
     /**
