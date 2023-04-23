@@ -13,7 +13,7 @@ class DistrictTableSeeder extends Seeder
 	 * @return void
 	 * @throws GuzzleException
 	 */
-    public function run()
+    public function run(): void
     {
 	    $client = new Client();
 	    $crawlKeywordUri = "https://provinces.open-api.vn";
