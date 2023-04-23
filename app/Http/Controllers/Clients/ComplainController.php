@@ -14,7 +14,14 @@ class ComplainController extends Controller
 {
     public function index(Request $request)
     {
+        $districtId = '';
         $q = $request->q;
+        $district_code = $request->district;
+        $district = District::where('code', $district_code)->first();
+        if($district) {
+            $districtId = $district->_id;
+        }
+
         $query = Complain::with(['user']);
 
         if ($q && strlen($q) > 0) {
@@ -22,22 +29,37 @@ class ComplainController extends Controller
                 ->orWhere('title', 'LIKE', '%' . $q . '%');
         }
 
+        if ($districtId && strlen($districtId) > 0) {
+            $query->where('district_id', $districtId);
+        }
         $complains = $query->orderByDesc('created_at')->paginate(10);
 
         return view('pages.home', [
             'complains' => $complains,
             'q' => $q,
+            'district' => $district_code,
         ]);
     }
 
     public function history(Request $request)
     {
+        $districtId = '';
         $q = $request->q;
+        $district_code = $request->district;
+        $district = District::where('code', $district_code)->first();
+        if($district) {
+            $districtId = $district->_id;
+        }
+
         $query = Complain::with(['user']);
 
         if ($q && strlen($q) > 0) {
             $query->where('code', 'LIKE', "%" . $q . "%")
                 ->orWhere('title', 'LIKE', '%' . $q . '%');
+        }
+
+        if ($districtId && strlen($districtId) > 0) {
+            $query->where('district_id', $districtId);
         }
 
         $complains = $query->where('user_id', Auth::guard('clients')->id())
@@ -47,6 +69,7 @@ class ComplainController extends Controller
         return view('pages.history_complain', [
             'complains' => $complains,
             'q' => $q,
+            'district' => $district_code,
         ]);
     }
 
@@ -102,7 +125,7 @@ class ComplainController extends Controller
 
     public function getAllDistrict()
     {
-        $districts = District::get(['name']);
+        $districts = District::get(['name', 'code']);
 
         return response()->json([
             'data' => $districts,
