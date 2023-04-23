@@ -32,7 +32,7 @@ class RoleService
                     ]);
                 }])->whereNull("parent_id");
 
-			return $roles->orderBy("created_at")->get([
+			return $roles->oldest()->get([
 				"name", "description", "is_protected", "parent_id",
 				"created_at", "updated_at", "permission_ids"
 			]);
@@ -48,37 +48,37 @@ class RoleService
 		}
 	}
 
-    public function rolesAction(Request $request) {
-        try {
-            $id = $request->id;
-            $roles = Role::query()
-                ->with(["children" => function($q) use ($id) {
-                    $q->select([
-                        "name", "description", "is_protected", "parent_id",
-                        "created_at", "permission_ids"
-                    ]);
-                    if($id){
-                        $q->where('_id', '<>', $id);
-                    }
-                }])->whereNull("parent_id")
-                ->where('is_protected', false);
-            if($id){
-                $roles->where('_id', '<>', $id);
-            }
-            return $roles->orderBy("created_at")->get([
-                "name", "description", "is_protected", "parent_id",
-                "created_at", "updated_at", "permission_ids"
-            ]);
-        }catch (Exception $e) {
-            Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách vai trò rút gọn", [
-                "method" => __METHOD__,
-                "line" => __LINE__,
-                "message" => $e->getMessage(),
-            ]);
+	public function rolesAction(Request $request) {
+		try {
+			$id = $request->id;
+			$roles = Role::query()
+				->with(["children" => function($q) use ($id) {
+					$q->select([
+						"name", "description", "is_protected", "parent_id",
+						"created_at", "permission_ids"
+					]);
+					if($id){
+						$q->where('_id', '<>', $id);
+					}
+				}])->whereNull("parent_id")
+				->where('is_protected', false);
+			if($id){
+				$roles->where('_id', '<>', $id);
+			}
+			return $roles->orderBy("created_at")->get([
+				"name", "description", "is_protected", "parent_id",
+				"created_at", "updated_at", "permission_ids"
+			]);
+		}catch (Exception $e) {
+			Log::error("ERROR - Đã có lỗi xảy ra khi lấy danh sách vai trò rút gọn", [
+				"method" => __METHOD__,
+				"line" => __LINE__,
+				"message" => $e->getMessage(),
+			]);
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 
     public function getAdminsRole(Request $request, $id){
         try {
@@ -86,8 +86,8 @@ class RoleService
             if($request->has('has_role')){
                 $query->whereIn('role_ids', [$id]);
             }else{
-                $query->whereNotIn('role_ids', [$id])
-                    ->where('is_admin', false);
+	            $query->whereNotIn('role_ids', [$id])
+		            ->where('is_admin', false);
             }
             return $query->get(["name", "email"]);
         } catch (Exception $e) {
@@ -198,14 +198,14 @@ class RoleService
 	{
 		try {
             $remove = $request->is_remove;
-            $permissionId = $request->permission_id;
+			$permissionId = $request->permission_id;
             $role = Role::find($id);
             $permissions = $role->permission_ids ?: [];
-            if($remove){
-                $permissions = array_diff($permissions, [$permissionId]);
-            } else {
-                $permissions[] = $permissionId;
-            }
+			if($remove){
+				$permissions = array_diff($permissions, [$permissionId]);
+			} else {
+				$permissions[] = $permissionId;
+			}
             $role->permissions()->sync($permissions);
 
 	        return true;

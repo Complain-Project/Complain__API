@@ -21,9 +21,9 @@ class Employee extends Authenticatable implements JWTSubject
 		"email",
 		"phone",
 		"password",
-		"avatar_path",
 		"status",
-		"keyword",
+		"district_id",
+		"is_admin",
 		"role_ids"
 	];
 
@@ -32,8 +32,8 @@ class Employee extends Authenticatable implements JWTSubject
 	];
 
 	const ACTIVE_STATUS = [
-		"ACTIVATED" => 1,
 		"DEACTIVATE" => 0,
+		"ACTIVATED" => 1,
 	];
 
 	/**
@@ -70,5 +70,9 @@ class Employee extends Authenticatable implements JWTSubject
 	public function roles(): \Jenssegers\Mongodb\Relations\BelongsToMany|BelongsToMany
 	{
 		return $this->belongsToMany(Role::class);
+	}
+
+	public function district() {
+		return $this->belongsTo(District::class);
 	}
 }

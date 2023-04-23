@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admins\Employees\StoreEmployeeRequest;
+use App\Http\Requests\Admins\Employees\UpdateEmployeeRequest;
 use App\Services\Admins\EmployeeService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -32,12 +34,26 @@ class EmployeeController extends Controller
 		return $employees ? ResponseTrait::responseSuccess($employees) : ResponseTrait::responseError();
 	}
 
+	public function getAllRole(): JsonResponse
+	{
+		$roles = $this->employeeService->getAllRole();
+
+		return $roles ? ResponseTrait::responseSuccess($roles) : ResponseTrait::responseError();
+	}
+
+	public function getAllDistrict(): JsonResponse
+	{
+		$districts = $this->employeeService->getAllDistrict();
+
+		return $districts ? ResponseTrait::responseSuccess($districts) : ResponseTrait::responseError();
+	}
+
 	/**
-	 * @param Request $request
+	 * @param StoreEmployeeRequest $request
 	 *
 	 * @return JsonResponse
 	 */
-	public function store(Request $request): JsonResponse
+	public function store(StoreEmployeeRequest $request): JsonResponse
 	{
 		$employee = $this->employeeService->store($request);
 
@@ -50,7 +66,7 @@ class EmployeeController extends Controller
 	 *
 	 * @return JsonResponse
 	 */
-	public function update(Request $request, $id): JsonResponse
+	public function update(UpdateEmployeeRequest $request, $id): JsonResponse
 	{
 		$employee = $this->employeeService->update($request, $id);
 

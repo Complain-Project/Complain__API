@@ -32,12 +32,12 @@ class RoleController extends Controller
 		return $roles ? ResponseTrait::responseSuccess($roles) : ResponseTrait::responseError();
 	}
 
-    public function rolesAction(Request $request): JsonResponse
-    {
-        $roles = $this->roleService->rolesAction($request);
+	public function rolesAction(Request $request): JsonResponse
+	{
+		$roles = $this->roleService->rolesAction($request);
 
-        return $roles ? ResponseTrait::responseSuccess($roles) : ResponseTrait::responseError();
-    }
+		return $roles ? ResponseTrait::responseSuccess($roles) : ResponseTrait::responseError();
+	}
 
     public function getAdminsRole(Request $request, $id)
     {
