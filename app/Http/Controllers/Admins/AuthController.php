@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admins\Auths\UpdateYourSelfRequest;
 use App\Models\Admins\Employee;
 use App\Models\Admins\Permission;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -58,6 +61,8 @@ class AuthController extends Controller
 	{
 		try {
 			if (Auth::guard("admins")->user()->status === Employee::ACTIVE_STATUS["ACTIVATED"]) {
+				$district = Auth::guard("admins")->user()->district;
+
 				$roles = Auth::guard("admins")->user()->roles;
 				$auth = collect($roles)->map(function ($role) {
 					return $role->permission_ids;
@@ -70,6 +75,7 @@ class AuthController extends Controller
 
 				Auth::guard("admins")->user()->makeHidden(["roles", "role_ids", "status"]);
 				Auth::guard("admins")->user()->permissions = $permissionCodes;
+				Auth::guard("admins")->user()->district = $district;
 
 				return ResponseTrait::responseSuccess(Auth::guard("admins")->user());
 			}
@@ -142,5 +148,46 @@ class AuthController extends Controller
 			"token_type" => "bearer",
 			"expires_in" => Auth::guard("admins")->factory()->getTTL() * 60
 		]);
+	}
+
+	public function updateInfo(UpdateYourSelfRequest $request): JsonResponse
+	{
+		try {
+			Employee::query()
+				->find(auth()->user()->_id)
+				->update([
+					"name" => $request->name,
+					"email" => $request->email,
+					"phone" => $request->phone
+				]);
+
+			return ResponseTrait::responseSuccess();
+		} catch (Exception $exception) {
+			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật thông tin bản thân", [
+				"method" => __METHOD__,
+				"message" => $exception->getMessage()
+			]);
+
+			return ResponseTrait::responseError();
+		}
+	}
+
+	public function updateAuthPassword(Request $request): JsonResponse
+	{
+		try {
+			Employee::query()
+				->find(auth()->user()->_id)
+				->update([
+					"password" => Hash::make($request->password)
+				]);
+
+			return ResponseTrait::responseSuccess();
+		} catch (Exception $e) {
+			Log::error("ERROR - Đã có lỗi xảy ra khi cập nhật mật khẩu tài khoản", [
+				"method" => __METHOD__,
+				"message" => $e->getMessage()
+			]);
+			return ResponseTrait::responseError();
+		}
 	}
 }

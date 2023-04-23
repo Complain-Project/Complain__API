@@ -32,6 +32,8 @@ Route::group(["middleware" => "api"], function () {
 			    Route::post("/logout", [Admins\AuthController::class, "logout"]);
 			    Route::post("/refresh", [Admins\AuthController::class, "refresh"]);
 			    Route::post("/me", [Admins\AuthController::class, "me"]);
+			    Route::patch("/", [Admins\AuthController::class, "updateInfo"]);
+			    Route::patch("/password", [Admins\AuthController::class, "updateAuthPassword"]);
 		    });
 		    /* Self::end */
 
