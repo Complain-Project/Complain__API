@@ -46,6 +46,13 @@ class PermissionGroupTableSeeder extends Seeder
 		    "parent_code" => null,
 		    "description" => null
 	    ]);
+
+        self::updateOrCreate([
+            "name" => "Quản lý bài viết",
+            "code" => "POST",
+            "parent_code" => null,
+            "description" => null
+        ]);
     }
 
     /**

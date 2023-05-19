@@ -85,6 +85,7 @@ Route::group(["middleware" => "api"], function () {
                 Route::get("/districts", [Admins\ComplainController::class, "getAllDistrict"]);
                 Route::get("/{id}", [Admins\ComplainController::class, "show"]);
                 Route::post("/reply/{id}", [Admins\ComplainController::class, "reply"]);
+                Route::post("/download/{id}", [Admins\ComplainController::class, "downloadFile"]);
             });
             /* Complain::end */
 
@@ -94,6 +95,22 @@ Route::group(["middleware" => "api"], function () {
 			    Route::patch("/{id}/status", [Admins\UserController::class, "updateStatus"]);
 		    });
 		    /* User::end */
+
+            /* Post::start */
+            Route::group(["prefix" => "posts"], function () {
+                Route::get("/", [Admins\PostController::class, "index"]);
+                Route::get("/all-tag", [Admins\PostController::class, "getAllTag"]);
+                Route::get("/all-post-category", [Admins\PostController::class, "getAllPostCategory"]);
+                Route::get("/all-tags", [Admins\PostController::class, "getAllPostTags"]);
+                Route::get("/{id}", [Admins\PostController::class, "show"]);
+                Route::post("/add-tag", [Admins\PostController::class, "storeTag"]);
+                Route::post("/update-banner/{id}", [Admins\PostController::class, "updateBanner"]);
+                Route::post("/", [Admins\PostController::class, "store"]);
+                Route::post("/{id}", [Admins\PostController::class, "update"]);
+                Route::post("/{id}/update-status", [Admins\PostController::class, "updateStatus"]);
+                Route::delete("/{id}", [Admins\PostController::class, "destroy"]);
+            });
+            /* Post::end */
 	    });
     });
     /* Admin::end */

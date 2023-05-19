@@ -19,6 +19,9 @@
         <li class="{{getActiveMenuClass('history')}}">
             <a href="{{route('history')}}">Lịch sử khiếu nại</a>
         </li>
+        <li class="{{getActiveMenuClass('posts')}}">
+            <a href="{{route('posts')}}">Bài viết</a>
+        </li>
         @if(Auth::guard('clients')->check())
             <li class="{{getActiveMenuClass(['profile.personal-information', 'profile.change-password'])}}">
                 <a href="{{route('profile.personal-information')}}">Thông tin cá nhân</a>

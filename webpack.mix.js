@@ -41,3 +41,9 @@ mix.js('resources/assets/js/profile/_profile.js', 'public/js/profile/');
 mix.sass('resources/assets/scss/complain/_detail.scss', 'public/css/complain/');
 mix.js('resources/assets/js/complain/_detail.js', 'public/js/complain/');
 /* Detail complain::end */
+
+/* Home::start */
+mix.sass('resources/assets/scss/post/_post.scss', 'public/css/post/');
+mix.sass('resources/assets/scss/post/_detail.scss', 'public/css/post/');
+mix.js('resources/assets/js/post/_post.js', 'public/js/post/');
+/* Home::end */

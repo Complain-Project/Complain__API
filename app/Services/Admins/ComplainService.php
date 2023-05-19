@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class ComplainService
 {
@@ -89,6 +90,29 @@ class ComplainService
             }
             $complain->save();
             return true;
+        } catch (Exception $e) {
+            Log::error("ERROR - Đã có lỗi xảy ra khi phản hồi khiếu nại", [
+                "method" => __METHOD__,
+                "line" => __LINE__,
+                "message" => $e->getMessage(),
+            ]);
+
+            return false;
+        }
+    }
+
+    public function downloadFile($id){
+        try {
+            $complain = Complain::find($id);
+            if($complain->attachment){
+                $rawData = url(Storage::url($complain->attachment));
+                return response($rawData, 200)
+                    ->header('Content-Type', 'docx')
+                    ->header('Content-Disposition', "attachment; filename='File khieu nai'");
+            }else{
+                return false;
+            }
+
         } catch (Exception $e) {
             Log::error("ERROR - Đã có lỗi xảy ra khi phản hồi khiếu nại", [
                 "method" => __METHOD__,

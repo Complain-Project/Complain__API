@@ -23,6 +23,17 @@ class PermissionTableSeeder extends Seeder
         ]);
         /* Super admin::end */
 
+        /* Tổng quan::start */
+        self::updateOrCreate([
+            "name" => "Tổng quan",
+            "description" => "",
+            "code" => "DAB-L",
+            "permission_type_code" => "LIST",
+            "permission_group_code" => "DAB",
+            "role_ids" => []
+        ]);
+        /* Tổng quan::end */
+
         /* Vai trò::start */
         self::updateOrCreate([
             "name" => "Xem danh sách vai trò",
@@ -146,6 +157,44 @@ class PermissionTableSeeder extends Seeder
 		    "role_ids" => []
 	    ]);
 	    /* Người khiếu nại::end */
+
+        /* Cán bộ::start */
+        self::updateOrCreate([
+            "name" => "Xem danh sách bài viết",
+            "description" => "",
+            "code" => "POST-L",
+            "permission_type_code" => "LIST",
+            "permission_group_code" => "POST",
+            "role_ids" => []
+        ]);
+
+        self::updateOrCreate([
+            "name" => "Thêm mới bài viết",
+            "description" => "",
+            "code" => "POST-C",
+            "permission_type_code" => "CREATE",
+            "permission_group_code" => "POST",
+            "role_ids" => []
+        ]);
+
+        self::updateOrCreate([
+            "name" => "Cập nhật bài viết",
+            "description" => "",
+            "code" => "POST-U",
+            "permission_type_code" => "UPDATE",
+            "permission_group_code" => "POST",
+            "role_ids" => []
+        ]);
+
+        self::updateOrCreate([
+            "name" => "Xóa bài viết",
+            "description" => "",
+            "code" => "POST-DEL",
+            "permission_type_code" => "DELETE",
+            "permission_group_code" => "POST",
+            "role_ids" => []
+        ]);
+        /* Cán bộ::end */
     }
 
     /**

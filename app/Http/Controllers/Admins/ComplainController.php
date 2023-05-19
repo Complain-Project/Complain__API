@@ -33,6 +33,12 @@ class ComplainController extends Controller
         return $complain ? ResponseTrait::responseSuccess() : ResponseTrait::responseError();
     }
 
+    public function downloadFile($id){
+        $file = $this->complainService->downloadFile($id);
+
+        return $file ? ResponseTrait::responseSuccess($file) : ResponseTrait::responseError();
+    }
+
     public function getAllDistrict()
     {
         $districts = $this->complainService->getAllDistrict();

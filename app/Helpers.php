@@ -3,6 +3,7 @@
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 if (!function_exists("service_path")) {
 	function service_path(): string
@@ -43,5 +44,26 @@ if (!function_exists('getActiveMenuClass')) {
             return in_array(Route::currentRouteName(), $routeName) ? 'active' : '';
         }
         return (Route::currentRouteName() === $routeName )? 'active' : '';
+    }
+}
+
+if (!function_exists('createSlug')) {
+    function createSlug($model, $title, $id) {
+        $slug = Str::slug($title);
+
+        $allSlugs = call_user_func(array($model, 'select'), 'slug')->where('slug', 'like', $slug . '%')
+            ->where('_id', '<>', $id)
+            ->get();
+
+        if (!$allSlugs->contains('slug', $slug)) {
+            return $slug;
+        }
+
+        for ($i = 1; $i <= 1000; $i++) {
+            $newSlug = $slug . '-' . $i;
+            if (!$allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Clients\AuthController;
 use App\Http\Controllers\Clients\ComplainController;
+use App\Http\Controllers\Clients\PostController;
 use App\Http\Controllers\Clients\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,10 +48,12 @@ Route::group(['middleware' => 'user.auth'], function () {
 Route::get('/complain', [ComplainController::class, 'submitComplainForm'])->name('complain.form');
 Route::get('/complain/{id}', [ComplainController::class, 'show'])->name('complain.detail');
 
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.detail');
+
 Route::get('/', [ComplainController::class, 'index'])->name('home');
 Route::get('/history', [ComplainController::class, 'history'])->name('history');
 Route::get('/all-district', [ComplainController::class, 'getAllDistrict']);
-
 
 
 
