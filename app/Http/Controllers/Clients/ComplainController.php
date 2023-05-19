@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\District;
 use App\Models\Clients\Complain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +17,7 @@ class ComplainController extends Controller
     {
         $districtId = '';
         $q = $request->q;
+        $date = $request->date;
         $district_code = $request->district;
         $district = District::where('code', $district_code)->first();
         if($district) {
@@ -32,12 +34,19 @@ class ComplainController extends Controller
         if ($districtId && strlen($districtId) > 0) {
             $query->where('district_id', $districtId);
         }
+        if ($date && strlen($date) > 0) {
+            $start = Carbon::createFromFormat('Y-m-d', $date)->startOfDay();
+            $end = Carbon::createFromFormat('Y-m-d', $date)->endOfDay();
+            $query->whereBetween('created_at', [$start, $end]);
+        }
+
         $complains = $query->orderByDesc('created_at')->paginate(10);
 
         return view('pages.home', [
             'complains' => $complains,
             'q' => $q,
             'district' => $district_code,
+            'date' => $date
         ]);
     }
 

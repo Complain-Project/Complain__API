@@ -8,8 +8,8 @@
         </div>
     </div>
     <ul class="float-start menus">
-        <li class="{{getActiveMenuClass('home')}}" id="home-page">
-            <a href="{{route('home')}}">
+        <li class="{{getActiveMenuClass('posts')}}" id="home-page">
+            <a href="{{route('posts')}}">
                 Trang chủ
             </a>
         </li>
@@ -19,8 +19,8 @@
         <li class="{{getActiveMenuClass('history')}}">
             <a href="{{route('history')}}">Lịch sử khiếu nại</a>
         </li>
-        <li class="{{getActiveMenuClass('posts')}}">
-            <a href="{{route('posts')}}">Bài viết</a>
+        <li class="{{getActiveMenuClass('home')}}">
+            <a href="{{route('home')}}">Tra cứu</a>
         </li>
         @if(Auth::guard('clients')->check())
             <li class="{{getActiveMenuClass(['profile.personal-information', 'profile.change-password'])}}">

@@ -17,10 +17,6 @@
     <div class="container">
         <div class="content">
 
-            <div class="main-title">
-                Bài viết
-            </div>
-
             <div class="form-group">
                 <form action="{{route('posts')}}" method="GET">
                     <div class="input-form d-flex">
@@ -29,7 +25,7 @@
                                value="{{old('date', $date)}}"
                                class="form-control date">
                         <input type="text" id="search" name="q" value="{{ $q }}" class="form-control"
-                               placeholder="Nhập mã số / Tiêu đề khiếu nại để tìm kiếm">
+                               placeholder="Nhập tiêu đề bài viết để tìm kiếm">
                         <button type="submit" class="btn btn-search btn-main">Tìm kiếm</button>
                     </div>
                 </form>

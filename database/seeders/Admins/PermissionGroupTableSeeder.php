@@ -48,6 +48,13 @@ class PermissionGroupTableSeeder extends Seeder
 	    ]);
 
         self::updateOrCreate([
+            "name" => "Quản lý khiếu nại",
+            "code" => "COMPLAIN",
+            "parent_code" => null,
+            "description" => null
+        ]);
+
+        self::updateOrCreate([
             "name" => "Quản lý bài viết",
             "code" => "POST",
             "parent_code" => null,

@@ -7,11 +7,11 @@
 @extends('layouts.master')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ mix('/css/complain/_detail.scss.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/complain/_detail.css') }}">
 @endsection
 
 @section('script')
-    <script src="{{ mix('/js/complain/_detail.scss.js') }}"></script>
+    <script src="{{ mix('/js/complain/_detail.js') }}"></script>
 @endsection
 
 @section('content')

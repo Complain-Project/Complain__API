@@ -44,16 +44,17 @@ Route::group(['middleware' => 'user.auth'], function () {
 
     /* Complain::end*/
 });
+Route::get('/complains', [ComplainController::class, 'index'])->name('home');
+Route::get('/history', [ComplainController::class, 'history'])->name('history');
+Route::get('/all-district', [ComplainController::class, 'getAllDistrict']);
 
 Route::get('/complain', [ComplainController::class, 'submitComplainForm'])->name('complain.form');
 Route::get('/complain/{id}', [ComplainController::class, 'show'])->name('complain.detail');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.detail');
+Route::get('/', [PostController::class, 'index'])->name('posts');
+Route::get('/{slug}', [PostController::class, 'show'])->name('post.detail');
 
-Route::get('/', [ComplainController::class, 'index'])->name('home');
-Route::get('/history', [ComplainController::class, 'history'])->name('history');
-Route::get('/all-district', [ComplainController::class, 'getAllDistrict']);
+
 
 
 

@@ -158,7 +158,7 @@ class PermissionTableSeeder extends Seeder
 	    ]);
 	    /* Người khiếu nại::end */
 
-        /* Cán bộ::start */
+        /* Bài viết::start */
         self::updateOrCreate([
             "name" => "Xem danh sách bài viết",
             "description" => "",
@@ -194,7 +194,26 @@ class PermissionTableSeeder extends Seeder
             "permission_group_code" => "POST",
             "role_ids" => []
         ]);
-        /* Cán bộ::end */
+        /* Bài viết::end */
+
+        /* Khiếu nại::start */
+        self::updateOrCreate([
+            "name" => "Xem danh sách khiếu nại",
+            "description" => "",
+            "code" => "COMPLAIN-L",
+            "permission_type_code" => "LIST",
+            "permission_group_code" => "COMPLAIN",
+            "role_ids" => []
+        ]);
+        self::updateOrCreate([
+            "name" => "Xem chi tiết khiếu nại",
+            "description" => "",
+            "code" => "COMPLAIN-DETAIL",
+            "permission_type_code" => "DETAIL",
+            "permission_group_code" => "COMPLAIN",
+            "role_ids" => []
+        ]);
+        /* Khiếu nại::end */
     }
 
     /**

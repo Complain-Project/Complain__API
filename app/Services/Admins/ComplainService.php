@@ -4,8 +4,8 @@ namespace App\Services\Admins;
 
 use App\Models\Admins\Complain;
 use App\Models\Admins\District;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -45,6 +45,13 @@ class ComplainService
             }
             if(!$employee->is_admin){
                 $complains->where('district_id', $employee->district_id);
+            }
+            if($request->has('start') && $request->has('end')){
+                $start = Carbon::parse((int)$request->start)
+                    ->timezone('Asia/Ho_Chi_Minh')->startOfDay();
+                $end = Carbon::parse((int)$request->end)
+                    ->timezone('Asia/Ho_Chi_Minh')->endOfDay();
+                $complains->whereBetween('created_at', [$start, $end]);
             }
 
             return $complains->latest()->paginate($perPage);

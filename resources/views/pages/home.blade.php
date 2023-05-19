@@ -25,12 +25,16 @@
                 <div class="form-group">
                     <form action="{{route('home')}}" method="GET">
                         <div class="input-form d-flex">
+                            <input type="text" onfocus="(this.type='date')"
+                                   name="date" placeholder="Chọn ngày tạo"
+                                   value="{{old('date', $date)}}"
+                                   class="form-control date me-2">
                             <select name="district" id="district_id"
                                     data-code="{{$district}}"
-                                    class="form-control me-2 w-50">
+                                    class="form-control district me-2">
                                 <option selected>Chọn cơ quan tiếp nhận</option>
                             </select>
-                            <input type="text" id="search" name="q" value="{{ $q }}" class="form-control"
+                            <input type="text" id="search" name="q" value="{{ $q }}" class="form-control search"
                                    placeholder="Nhập mã số / Tiêu đề khiếu nại để tìm kiếm">
                             <button type="submit" class="btn btn-search btn-main">Tìm kiếm</button>
                         </div>

@@ -56,8 +56,17 @@
                         outline: none;
                     }
                 }
+
+                .date, .district{
+                    width: 40%;
+                }
+
+                .search{
+                    width: 90%;
+                }
+
                 .btn-search {
-                    width: 270px;
+                    width: 10%;
                     position: absolute;
                     top: 0px;
                     right: 0px;
