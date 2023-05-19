@@ -96,6 +96,13 @@ Route::group(["middleware" => "api"], function () {
 		    });
 		    /* User::end */
 
+		    /* Dashboard::start */
+		    Route::group(["prefix" => "dashboards"], function () {
+			    Route::get("/districts", [Admins\DashboardController::class, "getDistrict"]);
+			    Route::get("/statistical", [Admins\DashboardController::class, "statistical"]);
+		    });
+		    /* Dashboard::end */
+
             /* Post::start */
             Route::group(["prefix" => "posts"], function () {
                 Route::get("/", [Admins\PostController::class, "index"]);
