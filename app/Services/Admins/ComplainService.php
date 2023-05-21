@@ -112,10 +112,7 @@ class ComplainService
         try {
             $complain = Complain::find($id);
             if($complain->attachment){
-                $rawData = url(Storage::url($complain->attachment));
-                return response($rawData, 200)
-                    ->header('Content-Type', 'docx')
-                    ->header('Content-Disposition', "attachment; filename='File khieu nai'");
+                return public_path() . '/storage/'.$complain->attachment;
             }else{
                 return false;
             }

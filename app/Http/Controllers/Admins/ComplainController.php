@@ -35,8 +35,7 @@ class ComplainController extends Controller
 
     public function downloadFile($id){
         $file = $this->complainService->downloadFile($id);
-
-        return $file ? ResponseTrait::responseSuccess($file) : ResponseTrait::responseError();
+        return $file ? response()->download($file, "download.xlsx") : ResponseTrait::responseError();
     }
 
     public function getAllDistrict()
