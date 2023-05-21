@@ -47,9 +47,12 @@ $(document).ready(function(){
             success: function (response) {
                 let listDistrict = response.data
                 $('#district_id').empty()
-                $('#district_id').append(' <option selected>Chọn cơ quan tiếp nhận</option>')
-                listDistrict.forEach(function (item) {
-                    $('#district_id').append('<option value="' + item._id + '">' + item.name + '</option>')
+                listDistrict.forEach(function (item, index) {
+                    if(index === 0){
+                        $('#district_id').append('<option selected value="' + item._id + '">' + item.name + '</option>')
+                    }else{
+                        $('#district_id').append('<option value="' + item._id + '">' + item.name + '</option>')
+                    }
                 });
             }
         })

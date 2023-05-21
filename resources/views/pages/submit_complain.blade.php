@@ -77,8 +77,6 @@
                                 <div class="input col-sm-9 col-xs-12">
                                     <select name="district_id" id="district_id"
                                             class="form-control">
-                                        <option selected>Chọn cơ quan tiếp nhận</option>
-
                                     </select>
                                 </div>
                             </div>
