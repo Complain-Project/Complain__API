@@ -62,7 +62,7 @@
 
                             <div class="content">
                                 @php
-                                    $date = Carbon::parse($complain['created_at'])
+                                    $date = Carbon::parse($complain['created_at'])->timezone('Asia/Ho_Chi_Minh')
                                 @endphp
                                 <div class="post-info">
                                     {{$complain->user->aliases}}

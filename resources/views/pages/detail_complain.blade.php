@@ -23,7 +23,7 @@
                     Kiến nghị về việc: {{$complain->title}}
                 </div>
                 @php
-                    $date = Carbon::parse($complain['created_at'])
+                    $date = Carbon::parse($complain['created_at'])->timezone('Asia/Ho_Chi_Minh')
                 @endphp
                 <div class="post-info">
                     {{Auth::guard('clients')->id() === $complain->user_id ? $complain->user->name : $complain->user->aliases}}
@@ -95,8 +95,8 @@
                                             <p>------------</p>
                                         </div>
                                         @php
-                                            $time = Carbon::parse($complain->updated_at);
-                                            $appointment_time = Carbon::parse($complain->updated_at)
+                                            $time = Carbon::parse($complain->updated_at)->timezone('Asia/Ho_Chi_Minh');
+                                            $appointment_time = Carbon::parse($complain->updated_at)->timezone('Asia/Ho_Chi_Minh');
                                         @endphp
                                         <p style="text-align: right; margin: 12px 0"><i>{{$complain->district->name}}, {{ $time->format('m:h') . ' ngày ' . $time->format(' d/m/Y') }}</i></p>
                                         <p style="text-align: center; font-size: 20px; font-weight: bold">THÔNG BÁO</p>
