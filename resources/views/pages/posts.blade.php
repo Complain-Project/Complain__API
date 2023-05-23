@@ -16,7 +16,6 @@
 <section class="post">
     <div class="container">
         <div class="content">
-
             <div class="form-group">
                 <form action="{{route('posts')}}" method="GET">
                     <div class="input-form d-flex">
@@ -53,7 +52,7 @@
                                         <img class="post-wrapper__image" src="{{$post->banner_src}}" alt="">
                                     </a>
                                     @php
-                                        $date = Carbon::parse($post->created_at)->format('h:m d/m/Y')
+                                        $date = Carbon::parse($post->created_at)->timezone('Asia/Ho_Chi_Minh')->format('H:i d/m/Y')
                                     @endphp
                                     <div class="post-wrapper__create">
                                         <i>Ngày tạo: {{$date}}</i>

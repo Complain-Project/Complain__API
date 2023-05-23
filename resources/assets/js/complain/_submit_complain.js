@@ -57,4 +57,13 @@ $(document).ready(function(){
             }
         })
     }
+
+    $('#file-select-btn').click(function() {
+        $('#file-upload').click();
+    });
+
+    $('#file-upload').change(function() {
+        var fileName = $(this).val().split('\\').pop();
+        $('label[for="file-upload"]').text(fileName);
+    });
 });

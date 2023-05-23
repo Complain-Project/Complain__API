@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Post::query()->with('author')
+        $query = Post::query()->with(['author'])
             ->where('status', Post::STATUS['ACTIVE']);
         $q = $request->q;
         $date = $request->date;

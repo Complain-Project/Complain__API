@@ -43,10 +43,7 @@ class PostService
                 $query->whereBetween('created_at', [$start, $end]);
             }
 
-            return $query->orderBy(
-                $request->input('col', '"created_at"'),
-                $request->input('sort', 'DESC')
-            )->paginate($perPage);
+            return $query->orderBy('created_at', 'DESC')->paginate($perPage);
         } catch (Exception $e) {
             Log::error("Error list post", [
                 "method" => __METHOD__,

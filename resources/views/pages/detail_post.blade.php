@@ -23,7 +23,7 @@
                         {{$post->title}}
                     </div>
                     @php
-                        $date = Carbon::parse($post['created_at'])->format('h:m d/m/Y')
+                        $date = Carbon::parse($post->created_at)->timezone('Asia/Ho_Chi_Minh')->format('H:i d/m/Y')
                     @endphp
                     <div class="content_body__author">
                         {{$post->author->name}}

@@ -85,7 +85,9 @@
                                     Tài liệu đính kèm
                                 </div>
                                 <div class="input col-sm-9 col-xs-12">
-                                    <input type="file" id="attachment" accept=".doc,.docx,.xlsx,.pdf" name="attachment">
+                                    <input id="file-upload" type="file"  accept=".doc,.docx,.xlsx,.pdf" name="attachment" style="display: none;">
+                                    <button id="file-select-btn">Chọn file</button>
+                                    <label for="file-upload">Chưa có file nào được chọn</label>
                                     <ul id="fileList"></ul>
                                 </div>
                             </div>
