@@ -27,7 +27,7 @@
                 @endphp
                 <div class="post-info">
                     {{Auth::guard('clients')->id() === $complain->user_id ? $complain->user->name : $complain->user->aliases}}
-                    - {{$date->format('m:h') . ' ngày ' . $date->format(' d/m/Y')}}
+                    - {{$date->format('H:i') . ' ngày ' . $date->format(' d/m/Y')}}
 
                     @if($complain->status === Complain::STATUS['PROCESSED'])
                         <span class="status replied">Đã trả lời</span>
@@ -98,7 +98,7 @@
                                             $time = Carbon::parse($complain->updated_at)->timezone('Asia/Ho_Chi_Minh');
                                             $appointment_time = Carbon::parse($complain->updated_at)->timezone('Asia/Ho_Chi_Minh');
                                         @endphp
-                                        <p style="text-align: right; margin: 12px 0"><i>{{$complain->district->name}}, {{ $time->format('m:h') . ' ngày ' . $time->format(' d/m/Y') }}</i></p>
+                                        <p style="text-align: right; margin: 12px 0"><i>{{$complain->district->name}}, {{ $time->format('H:i') . ' ngày ' . $time->format(' d/m/Y') }}</i></p>
                                         <p style="text-align: center; font-size: 20px; font-weight: bold">THÔNG BÁO</p>
                                         <div style="font-size: 16px">
                                             <p style="text-align: center; font-weight: bold">Về việc thụ lý giải quyết khiếu nại {{$complain->code}}</p>
@@ -107,7 +107,7 @@
                                             <p>Số CMND/CCCD: {{$complain->user->account_name}}</p>
                                             <p>Khiếu nại về việc: {{$complain->title}}</p>
                                             <p>Sau khi xem xét nội dung đơn khiếu nại, căn cứ Luật khiếu nại năm 2011, đơn khiếu nại đủ điều kiện thụ lý và thuộc thẩm quyền giải quyết của UBND {{$complain->district->name}}</p>
-                                            <p>Đơn khiếu nại đã được thụ lý giải quyết kể từ {{ $appointment_time->format('m:h') . ' ngày ' . $appointment_time->format(' d/m/Y') }}</p>
+                                            <p>Đơn khiếu nại đã được thụ lý giải quyết kể từ {{ $appointment_time->format('H:i') . ' ngày ' . $appointment_time->format(' d/m/Y') }}</p>
                                             <p>Vậy thông báo để Ông(Bà) {{$complain->user->name}} được biết.</p>
                                             <p style="text-align: right; font-weight: bold">Người đứng đầu cơ quan, tổ chức, đơn vị</p>
                                             <p style="text-align: right; margin-right: 40px"><i>(Ký, ghi rõ họ tên và đóng dấu)</i></p>

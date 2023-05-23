@@ -87,7 +87,7 @@
                                     @endphp
                                     <div class="post-info">
                                         {{Auth::guard('clients')->id() === $complain->user_id ? $complain->user->name : $complain->user->aliases}}
-                                        - {{$date->format('m:h') . ' ngày ' . $date->format(' d/m/Y')}}
+                                        - {{$date->format('H:i') . ' ngày ' . $date->format(' d/m/Y')}}
 
                                         @if($complain->status === Complain::STATUS['PROCESSED'])
                                             <span class="status replied">Đã trả lời</span>
