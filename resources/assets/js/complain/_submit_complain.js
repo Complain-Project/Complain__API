@@ -59,6 +59,7 @@ $(document).ready(function(){
     }
 
     $('#file-select-btn').click(function() {
+        e.preventDefault();
         $('#file-upload').click();
     });
 
